@@ -23,6 +23,7 @@ with mysql.connector.connect(host=host,user=user,password=password,db=db) as con
     cursor.execute('create table if not exists users(username varchar(15) primary key,password varchar(15),email varchar(80),email_status enum("confirmed","not confirmed"))')
     cursor.execute('create table if not exists(nid BINARY(16) PRIMARY KEY,title TINYTEXT,content TEXT,date TIMESTAMP DEFAULT CURRENT_TIMESTAMP on update current_timestamp,added_by VARCHAR(15),FOREIGN KEY (added_by) REFERENCES users(username))')
     cursor.execute('create table if not exists(fid binary(16) primary key,extension varchar(8),filedata longblob,date timestamp default now() on update now(),added_by varchar(15), FOREIGN KEY (added_by) REFERENCES users(username))')
+mydb=mysql.connector.connect(host=host,user=user,password=password,db=db)
 @app.route('/')
 def index():
     return render_template('title.html')
